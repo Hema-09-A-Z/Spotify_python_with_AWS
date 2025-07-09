@@ -1,0 +1,27 @@
+
+import spotipy
+import json
+import os
+from spotipy import SpotifyClientCredentials
+import boto3
+from datetime import datetime
+
+def lambda_handler(event, context):
+    client_id=os.environ.get('client_id')
+    client_secret=os.environ.get('client_secret')
+    playlist=os.environ.get('playlist')
+
+    client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+    sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
+    playlists = sp.user_playlists('spotify')
+
+    data=sp.playlist_tracks(playlist)   
+
+    filename="spotify_raw_"+ str(datetime.now())+".json"
+
+    client = boto3.client('s3')
+    client.put_object(Bucket="spotify-python-project",
+     Key="RAW-DATA/Unprocessed-data/"+ filename, 
+     Body= json.dumps(data))
+
+     
