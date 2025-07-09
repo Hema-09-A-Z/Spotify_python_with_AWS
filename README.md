@@ -12,7 +12,7 @@ To build a serverless data pipeline that extracts data from the Spotify API, pro
  
 ---
  
-🔧** Tools and Services Used:**
+🔧**Tools and Services Used:**
  
 Spotify API
  
