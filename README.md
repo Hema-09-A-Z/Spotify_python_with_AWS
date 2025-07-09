@@ -12,7 +12,7 @@ To build a serverless data pipeline that extracts data from the Spotify API, pro
  
 ---
  
-**🔧 Tools and Services Used:**
+🔧** Tools and Services Used:**
  
 Spotify API
  
@@ -30,11 +30,11 @@ Amazon Athena
  
 ---
  
-**🧱 Architecture Stages:**
+🧱 **Architecture Stages:**
  
-🔹**** EXTRACT****
+🔹 **EXTRACT**
  
-1. Spotify API + Python Script:
+**1. Spotify API + Python Script:**
  
 A Python script is written to call the Spotify API.
  
@@ -42,7 +42,7 @@ It fetches music-related metadata (e.g., song name, artist, duration, popularity
  
  
  
-2. Amazon CloudWatch (Scheduler):
+**2. Amazon CloudWatch (Scheduler):**
  
 A CloudWatch Event Rule is scheduled (e.g., daily trigger) to invoke the extraction Lambda function.
  
@@ -50,7 +50,7 @@ Ensures automated and periodic data fetching.
  
  
  
-3. AWS Lambda (Data Extraction):
+**3. AWS Lambda (Data Extraction):**
  
 This Lambda function:
  
@@ -67,15 +67,15 @@ Stores the raw JSON data into Amazon S3 (raw data folder).
  
 ---
  
-🔹** **TRANSFORM****
+🔹**TRANSFORM**
  
-4. S3 Trigger (Object Put):
+**4. S3 Trigger (Object Put):**
  
 When raw data is uploaded to the S3 bucket, it automatically triggers another Lambda.
  
  
  
-5. AWS Lambda (Data Transformation):
+**5. AWS Lambda (Data Transformation):**
  
 Cleans and transforms the raw data:
  
@@ -94,15 +94,15 @@ Writes the processed data to a different S3 location (e.g., s3://bucket-name/pro
  
 ---
  
-🔹 ****LOAD****
+🔹 **LOAD**
  
-6. Amazon S3 (Transformed Data):
+**6. Amazon S3 (Transformed Data):**
  
 Now holds clean, structured data in a format like Parquet/CSV/JSON.
  
  
  
-7. AWS Glue Crawler:
+**7. AWS Glue Crawler:**
  
 Periodically or manually run to scan the transformed data folder.
  
@@ -110,7 +110,7 @@ Infers schema and updates the AWS Glue Data Catalog with table definitions.
  
  
  
-8. AWS Glue Data Catalog:
+**8. AWS Glue Data Catalog:**
  
 Acts as the metadata store for the transformed datasets.
  
@@ -118,7 +118,7 @@ Enables querying from Athena by providing table structure.
  
  
  
-9. Amazon Athena (SQL Analytics):
+**9. Amazon Athena (SQL Analytics):**
  
 Used to run SQL queries on the transformed data stored in S3.
  
@@ -141,7 +141,7 @@ s3://spotify-pipeline/
  
 ---
  
-**📌 Summary:**
+📌 **Summary:**
  
 Step Service Action
  
@@ -157,7 +157,7 @@ Step Service Action
  
 ---
  
-**🔄 Automation & Triggers:**
+🔄 **Automation & Triggers:**
  
 CloudWatch: Schedules extraction Lambda.
  
